@@ -1,0 +1,28 @@
+<div *ngFor="let item of formModel; index as i" [formGroup]="form">
+  <div *ngIf="item.type === 'input'" class="dynamic-form-input">
+    <label for="{{ item.label }}">{{ item.label }}</label>
+    <div>
+      <input
+        type="{{ item.inputType }}"
+        [formControlName]="getControlName(item.label)"
+        placeholder="{{ item.placeholder }}"
+        class="form-control"
+      />
+    </div>
+  </div>
+  <div *ngIf="item.type === 'select'" class="dynamic-form-select">
+    <label for="{{ item.label }}">{{ item.label }}</label>
+    <div>
+      <select  [formControlName]="getControlName(item.label)" class="form-control">
+        <option
+          *ngFor="let option of item.options"
+          value="{{ option.value }}"
+          >{{ option.value }}</option
+        >
+      </select>
+    </div>
+  </div>
+</div>
+<div>
+  <button class="btn btn-outline-primary" (click)="OnSubmit()">Submit</button>
+</div>

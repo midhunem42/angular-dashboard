@@ -1,0 +1,48 @@
+<div class="float-right row row-left">
+  <button class="btn btn-outline-primary" [routerLink]="['/form']">
+    View Form
+  </button>
+  <button
+    class="btn btn-outline-primary"
+    style="margin-left:10px"
+    [routerLink]="['/create-field']"
+  >
+    Add New Field
+  </button>
+</div>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Field Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Placeholder</th>
+        <th scope="col">Input Type</th>
+        <th scope="col">Options</th>
+        <th scope="col">Required</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of formModels; index as i">
+        <th scope="row">{{ i }}</th>
+        <td>{{ item.label }}</td>
+        <td>{{ item.type }}</td>
+        <td>{{ item.placeholder }}</td>
+        <td>{{ item.inputType }}</td>
+        <td *ngIf="item.type === 'select'">
+          <div *ngFor="let option of item.options">
+            <p>
+              {{ option.value }}
+            </p>
+          </div>
+        </td>
+        <td *ngIf="item.type !== 'select'">
+          Not select box
+        </td>
+
+        <td>{{ item.required }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

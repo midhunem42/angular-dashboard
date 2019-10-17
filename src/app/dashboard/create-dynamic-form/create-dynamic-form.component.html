@@ -1,0 +1,109 @@
+<div class="col-md-5 col-sm-12">
+  <div class="dynamic-form-input">
+    <label for="FieldName">Field Name <span class="required">*</span></label>
+    <div>
+      <input
+        [(ngModel)]="formModel.label"
+        class="form-control"
+        type="text"
+        placeholder="Enter FieldName"
+      />
+    </div>
+  </div>
+  <div class="dynamic-form-input">
+    <label for="FieldName">Field type</label>
+    <div>
+      <select
+        [(ngModel)]="formModel.type"
+        class="form-control"
+        value="{{ formModel.type }}"
+      >
+        <option value="input">input</option>
+        <option value="select">select</option>
+        <option value="textarea">Text Area</option>
+      </select>
+    </div>
+  </div>
+  <div *ngIf="formModel.type === 'input' || formModel.type === 'textarea'">
+    <div class="dynamic-form-input">
+      <label for="FieldPlaceholder"
+        >Field Placeholder <span class="required">*</span></label
+      >
+      <div>
+        <input
+          class="form-control"
+          [(ngModel)]="formModel.placeholder"
+          id="FieldPlaceholder"
+          type="text"
+          placeholder="Enter placeholder"
+        />
+      </div>
+    </div>
+    <div class="dynamic-form-input" *ngIf="formModel.type === 'input'">
+      <label for="InputType">Input type</label>
+      <div>
+        <select
+          class="form-control"
+          [(ngModel)]="formModel.inputType"
+          value="{{ formModel.inputType }}"
+        >
+          <option value="text">text</option>
+          <option value="password">password</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="formModel.type === 'select'" class="dynamic-form-input">
+    <label for="Options">Options <span class="required">*</span></label>
+    <div
+      class="row row-left"
+      *ngFor="let option of formModel.options; index as op"
+    >
+      <div>
+        <input
+          class="form-control"
+          [(ngModel)]="option.value"
+          type="text"
+          placeholder="Enter option"
+        />
+      </div>
+      <div style="margin-left: 8px" *ngIf="formModel.options.length - 1 === op">
+        <button class="btn btn-outline-primary" (click)="addOptions()">
+          Add More
+        </button>
+      </div>
+      <div style="margin-left: 8px" *ngIf="formModel.options.length !== 1">
+        <button class="btn btn-outline-primary" (click)="deleteOption(op)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dynamic-form-input">
+    <label for="FieldName">Field Required</label>
+    <div>
+      <select
+        [(ngModel)]="formModel.required"
+        class="form-control"
+        value="{{ formModel.required }}"
+      >
+        <option value="true">True</option>
+        <option value="false">False</option>
+      </select>
+    </div>
+  </div>
+  <div class="dynamic-form-input row row-left">
+    <button class="btn btn-outline-primary" [routerLink]="['/form-fields']">
+      Cancel
+    </button>
+    <button
+      class="btn btn-outline-primary"
+      style="margin-left: 8px"
+      (click)="saveField()"
+    >
+      Save
+    </button>
+  </div>
+</div>

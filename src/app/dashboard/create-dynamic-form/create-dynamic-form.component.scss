@@ -1,0 +1,12 @@
+.dynamic-form-input {
+  margin-top: 15px;
+}
+.row-left {
+  margin-left: unset;
+  margin-bottom: 8px;
+}
+span {
+  &.required {
+    color: red;
+  }
+}
