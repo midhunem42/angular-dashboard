@@ -6,21 +6,24 @@ import { CreateDynamicFormComponent } from "./create-dynamic-form/create-dynamic
 import { DynamicFormComponent } from "./dynamic-form/dynamic-form.component";
 
 const routes: Routes = [
+  { path: "", redirectTo: "dashboard", pathMatch: "full" },
   {
-    path: "",
-    component: DashboardComponent
-  },
-  {
-    path: "form-fields",
-    component: DynamicFormFieldsComponent
-  },
-  {
-    path: "create-field",
-    component: CreateDynamicFormComponent
-  },
-  {
-    path: "form",
-    component: DynamicFormComponent
+    path: "dashboard",
+    component: DashboardComponent,
+    children: [
+      {
+        path: "form-fields",
+        component: DynamicFormFieldsComponent
+      },
+      {
+        path: "create-field",
+        component: CreateDynamicFormComponent
+      },
+      {
+        path: "form",
+        component: DynamicFormComponent
+      }
+    ]
   }
 ];
 

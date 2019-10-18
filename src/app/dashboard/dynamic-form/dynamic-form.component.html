@@ -1,5 +1,5 @@
 <div *ngFor="let item of formModel; index as i" [formGroup]="form">
-  <div *ngIf="item.type === 'input'" class="dynamic-form-input">
+  <div *ngIf="item.type === 'input'" class="dynamic-form-input mb-3">
     <label for="{{ item.label }}">{{ item.label }}</label>
     <div>
       <input
@@ -10,16 +10,31 @@
       />
     </div>
   </div>
-  <div *ngIf="item.type === 'select'" class="dynamic-form-select">
+  <div *ngIf="item.type === 'select'" class="dynamic-form-select mb-3">
     <label for="{{ item.label }}">{{ item.label }}</label>
     <div>
-      <select  [formControlName]="getControlName(item.label)" class="form-control">
+      <select
+        [formControlName]="getControlName(item.label)"
+        class="form-control"
+      >
         <option
           *ngFor="let option of item.options"
           value="{{ option.value }}"
           >{{ option.value }}</option
         >
       </select>
+    </div>
+  </div>
+  <div *ngIf="item.type === 'textarea'" class="dynamic-form-input mb-3">
+    <label for="{{ item.label }}">{{ item.label }}</label>
+    <div>
+      <textarea
+        cols="30"
+        rows="10"
+        [formControlName]="getControlName(item.label)"
+        placeholder="{{ item.placeholder }}"
+        class="form-control"
+      ></textarea>
     </div>
   </div>
 </div>

@@ -72,7 +72,7 @@ export class CreateDynamicFormComponent implements OnInit {
     if (!this.error) {
 
       this.createDynamicFormService.formModel.push(this.formModel);
-      this.router.navigate(["/form-fields"]);
+      this.router.navigate(["/dashboard/form-fields"]);
     }
   }
 

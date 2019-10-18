@@ -7,15 +7,17 @@ import { SidebarComponent } from "./sidebar/sidebar.component";
 import { NavbarComponent } from "./navbar/navbar.component";
 import { RouterModule } from "@angular/router";
 
-const components = [AuthenticComponent, CoreComponent];
+const components = [
+  AuthenticComponent,
+  CoreComponent,
+  FrameWorkBodyComponent,
+  SidebarComponent,
+  NavbarComponent
+];
+const custom_modules = [];
 @NgModule({
-  declarations: [
-    ...components,
-    FrameWorkBodyComponent,
-    SidebarComponent,
-    NavbarComponent
-  ],
-  imports: [CommonModule, RouterModule],
-  exports: [...components]
+  declarations: [...components],
+  imports: [CommonModule, RouterModule, ...custom_modules],
+  exports: [...components, ...custom_modules]
 })
 export class CoreModule {}

@@ -1,0 +1,13 @@
+<div>
+  <input
+    class="{{ class }}"
+    id="{{ id }}"
+    [attr.list]="dataListId"
+    [ngStyle]="style"
+    [formControl]="control"
+    name="name"
+  />
+  <datalist id="{{ dataListId }}">
+    <option value="{{ item }}" *ngFor="let item of options"> </option>
+  </datalist>
+</div>

@@ -14,6 +14,8 @@ export class DynamicFormComponent implements OnInit {
   fields = [];
   form: FormGroup;
 
+  datalist;
+
   constructor(
     private createDynamicFormService: CreateDynamicFormService,
     private formBuilder: FormBuilder

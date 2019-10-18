@@ -8,6 +8,7 @@ import { CreateDynamicFormComponent } from "./create-dynamic-form/create-dynamic
 import { DynamicFormFieldsComponent } from "./dynamic-form-fields/dynamic-form-fields.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CoreModule } from "../core/core.module";
+import { ComponentsModule } from "../core/components/components.module";
 
 const components = [
   CreateDynamicFormComponent,
@@ -15,7 +16,12 @@ const components = [
   DynamicFormComponent,
   DynamicFormFieldsComponent
 ];
-const custom_modules = [CoreModule, FormsModule, ReactiveFormsModule];
+const custom_modules = [
+  ComponentsModule,
+  CoreModule,
+  FormsModule,
+  ReactiveFormsModule
+];
 @NgModule({
   declarations: [...components],
   imports: [CommonModule, DashboardRoutingModule, ...custom_modules],

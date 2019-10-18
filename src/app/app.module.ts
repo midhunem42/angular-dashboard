@@ -6,6 +6,7 @@ import { AppComponent } from "./app.component";
 import { DashboardModule } from "./dashboard/dashboard.module";
 import { UserModule } from "./user/user.module";
 import { CoreModule } from "./core/core.module";
+import { PageErrorModule } from "./page-error/page-error.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,7 +15,8 @@ import { CoreModule } from "./core/core.module";
     AppRoutingModule,
     DashboardModule,
     CoreModule,
-    UserModule
+    UserModule,
+    PageErrorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
