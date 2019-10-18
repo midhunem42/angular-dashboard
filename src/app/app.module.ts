@@ -7,18 +7,24 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { UserModule } from "./user/user.module";
 import { CoreModule } from "./core/core.module";
 import { PageErrorModule } from "./page-error/page-error.module";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { ErrorInterceptor, JwtInterceptor } from "./core/_helpers";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    DashboardModule,
+    BrowserModule,
     CoreModule,
-    UserModule,
-    PageErrorModule
+    DashboardModule,
+    HttpClientModule,
+    PageErrorModule,
+    UserModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

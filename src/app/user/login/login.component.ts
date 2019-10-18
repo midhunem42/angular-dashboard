@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { LoginModel } from "src/app/core/models/login";
+import { Router, ActivatedRoute } from "@angular/router";
+import { first } from "rxjs/operators";
+import { UserService } from "src/app/_services";
+import { LoginModel } from "src/app/core/_models";
 
 @Component({
   selector: "app-login",
@@ -8,21 +10,27 @@ import { LoginModel } from "src/app/core/models/login";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private userService: UserService
+  ) {}
+  returnUrl: string;
 
-  ngOnInit() {}
+  ngOnInit() {
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+  }
 
   onSubmit() {
     let user = new LoginModel();
-    user.setField({
-      token: "token0000",
-      userId: "user001",
-      role: "USER",
-      refreshToken: "refresh",
-      loginTime: new Date(),
-      expiresIn: new Date()
-    });
-    sessionStorage.setItem("currentUser", JSON.stringify(user));
-    this.router.navigate(["/dashboard/form-fields"]);
+    this.userService.login("eve.holt@reqres.in", "cityslicka").subscribe(
+      data => {
+        this.router.navigate([this.returnUrl]);
+      },
+      error => {
+        // this.loading = false;
+      }
+    );
   }
 }

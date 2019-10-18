@@ -8,7 +8,7 @@ import {
   Router
 } from "@angular/router";
 import { Observable } from "rxjs";
-import { LoginModel } from "../../models/login";
+import { LoginModel } from "../_models";
 
 @Injectable({
   providedIn: "root"
@@ -26,10 +26,11 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     const currentUser: LoginModel = sessionStorage.getItem("currentUser")
       ? JSON.parse(sessionStorage.getItem("currentUser"))
       : new LoginModel();
-    console.log("====================================");
-    console.log(currentUser);
-    console.log("====================================");
-    return !!currentUser.token ? true : this.router.navigate(["/login"]);
+    return !!currentUser.token
+      ? true
+      : this.router.navigate(["/login"], {
+          queryParams: { returnUrl: state.url }
+        });
   }
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
@@ -42,6 +43,10 @@ export class AuthGuardService implements CanActivate, CanActivateChild {
     const currentUser: LoginModel = sessionStorage.getItem("currentUser")
       ? JSON.parse(sessionStorage.getItem("currentUser"))
       : new LoginModel();
-    return !!currentUser.token ? true : this.router.navigate(["/login"]);
+    return !!currentUser.token
+      ? true
+      : this.router.navigate(["/login"], {
+          queryParams: { returnUrl: state.url }
+        });
   }
 }
